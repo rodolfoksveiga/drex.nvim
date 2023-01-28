@@ -389,7 +389,7 @@ end
 ---
 ---If you move the elements (`move` == true) the DREX clipboard entries will be updated to match the new location
 ---@param move boolean Should the entries be moved (removed from their current location) or copied
-function M.paste(move, dest_path)
+local function paste(move)
     local elements = clipboard.get_clipboard_entries('desc')
 
     -- check for an empty clipboard
@@ -399,7 +399,7 @@ function M.paste(move, dest_path)
         return
     end
 
-	dest_path = dest_path or get_destination_path()
+    local dest_path = get_destination_path()
     if not dest_path then
         return
     end
@@ -480,13 +480,13 @@ function M.paste(move, dest_path)
 end
 
 ---Copy and paste all DREX clipboard entries to the current location
-function M.copy_and_paste(dest_path)
-    M.paste(false, dest_path)
+function M.copy_and_paste()
+    paste(false)
 end
 
 ---Cut and move all DREX clipboard entries to the current location
-function M.cut_and_move(dest_path)
-    M.paste(true, dest_path)
+function M.cut_and_move()
+    paste(true)
 end
 
 ---Rename multiple elements at once (e.g. by using macros or `:s`)

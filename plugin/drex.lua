@@ -44,7 +44,7 @@ end, {
 })
 
 vim.api.nvim_create_user_command('DrexDrawerFindFileAndFocus', function()
-    require('drex.drawer').find_element('%', true, true)
+    pcall(require('drex.drawer').find_element, '%', true, true)
 end, {
     desc = 'Jump to the current file in the DREX drawer window and focus it'
 })

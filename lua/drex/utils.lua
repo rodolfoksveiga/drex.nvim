@@ -221,8 +221,8 @@ function M.floating_win(buffer, on_leave)
     --   - 60% of Neovim window (default)
     --   - or at least 80 columns
     --   - or as long as the longest element (if enough space)
-    local win_height = math.floor(vim_height * 0.8)
-    local win_width = math.floor(vim_width * 0.6)
+    local win_height = math.floor(vim_height * 0.4)
+    local win_width = math.floor(vim_width * 0.4)
 
     win_width = win_width < 80 and 80 or win_width
     local max_element_width = vim.fn.max(vim.tbl_map(function(line) return #line end, lines))
@@ -247,6 +247,7 @@ function M.floating_win(buffer, on_leave)
         border = 'rounded',
         noautocmd = false,
     })
+    api.nvim_win_set_option(win, 'winhl', 'Normal:Normal,FloatBorder:Normal')
     api.nvim_win_set_option(win, 'wrap', false)
 
     api.nvim_create_autocmd('WinLeave', {
