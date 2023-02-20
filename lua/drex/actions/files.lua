@@ -389,7 +389,7 @@ end
 ---
 ---If you move the elements (`move` == true) the DREX clipboard entries will be updated to match the new location
 ---@param move boolean Should the entries be moved (removed from their current location) or copied
-local function paste(move)
+function M.paste(move)
     local elements = clipboard.get_clipboard_entries('desc')
 
     -- check for an empty clipboard
