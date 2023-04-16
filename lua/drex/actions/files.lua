@@ -525,15 +525,8 @@ function M.multi_rename(mode, opts)
         elements = { utils.get_element(api.nvim_get_current_line()) }
     end
 
-    local buffer_lines = {
-        "# Confirm changes by leaving this buffer or closing the window and approve the",
-        "# confirmation (only if changes exist). Renaming will be processed line by line",
-        "# from top to bottom. Comment lines starting with '#' will be ignored",
-        unpack(elements)
-    }
-
     local buffer = api.nvim_create_buf(false, true)
-    api.nvim_buf_set_lines(buffer, 0, -1, false, buffer_lines)
+    api.nvim_buf_set_lines(buffer, 0, -1, false, elements)
     api.nvim_buf_set_option(buffer, 'buftype', 'nofile')
     api.nvim_buf_set_option(buffer, 'bufhidden', 'wipe')
     api.nvim_buf_set_option(buffer, 'syntax', 'gitcommit') -- to shade comment lines

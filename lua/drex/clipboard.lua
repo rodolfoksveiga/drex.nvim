@@ -81,18 +81,8 @@ end
 ---- Invalid paths will also be ignored
 function M.open_clipboard_window()
     local elements = M.get_clipboard_entries('asc')
-    local buf_lines = {
-        '# DREX CLIPBOARD',
-        '',
-        '# Confirm changes by leaving this buffer or closing the window and approve the',
-        "# confirmation (only if changes exist). Empty lines, comments starting with '#'",
-        '# and non-existing elements will be ignored and not added to the clipboard',
-        '',
-        unpack(elements)
-    }
-
     local buffer = api.nvim_create_buf(false, true)
-    api.nvim_buf_set_lines(buffer, 0, -1, false, buf_lines)
+    api.nvim_buf_set_lines(buffer, 0, -1, false, elements)
     api.nvim_buf_set_option(buffer, 'buftype', 'nofile')
     api.nvim_buf_set_option(buffer, 'bufhidden', 'wipe')
     api.nvim_buf_set_option(buffer, 'syntax', 'gitcommit')
